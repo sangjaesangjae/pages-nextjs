@@ -7,7 +7,7 @@
 1. https://github.com/new 에서 repo 생성 (예: `sangjaelabs-pages`, private 가능)
 2. 로컬에서:
    ```bash
-   cd /Users/kwonsangjae/Desktop/app/pages-nextjs
+   cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs
    git remote add origin git@github.com:<계정>/sangjaelabs-pages.git
    git push -u origin main
    ```

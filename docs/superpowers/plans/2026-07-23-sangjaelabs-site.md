@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-- 작업 디렉토리: `/Users/kwonsangjae/Desktop/app/pages-nextjs`
+- 작업 디렉토리: `/Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs`
 - 모든 사용자 노출 콘텐츠는 **한국어**
 - AdMob 게시자 ID: `pub-5672091686767584` (정확히 이 값)
 - 공개 문의 이메일: `sjsj00718@gmail.com`
@@ -44,7 +44,7 @@ google.com, pub-5672091686767584, DIRECT, f08c47fec0942fa0
 - [ ] **Step 2: 데모 SVG 삭제**
 
 ```bash
-cd /Users/kwonsangjae/Desktop/app/pages-nextjs
+cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs
 rm public/next.svg public/vercel.svg public/file.svg public/globe.svg public/window.svg
 ```
 
@@ -181,7 +181,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 - [ ] **Step 5: 빌드 검증**
 
-Run: `cd /Users/kwonsangjae/Desktop/app/pages-nextjs && npm run build`
+Run: `cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs && npm run build`
 Expected: 빌드 성공. 라우트 테이블에 `/robots.txt`, `/sitemap.xml`이 `○ (Static)`으로 표시.
 
 - [ ] **Step 6: Commit**
@@ -340,7 +340,7 @@ export default function PrivacyPage() {
 
 - [ ] **Step 2: 빌드 검증**
 
-Run: `cd /Users/kwonsangjae/Desktop/app/pages-nextjs && npm run build`
+Run: `cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs && npm run build`
 Expected: 빌드 성공. `/privacy`가 `○ (Static)`으로 표시.
 
 - [ ] **Step 3: Commit**
@@ -417,7 +417,7 @@ export default function SupportPage() {
 
 - [ ] **Step 2: 빌드 검증**
 
-Run: `cd /Users/kwonsangjae/Desktop/app/pages-nextjs && npm run build`
+Run: `cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs && npm run build`
 Expected: 빌드 성공. `/support`가 `○ (Static)`으로 표시.
 
 - [ ] **Step 3: Commit**
@@ -587,7 +587,7 @@ export default function Home() {
 
 - [ ] **Step 4: 빌드 검증**
 
-Run: `cd /Users/kwonsangjae/Desktop/app/pages-nextjs && npm run build`
+Run: `cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs && npm run build`
 Expected: 빌드 성공. `/`, `/privacy`, `/support`, `/design-system` 모두 `○ (Static)`.
 
 - [ ] **Step 5: Commit**
@@ -609,13 +609,13 @@ git commit -m "feat: nemo 랜딩 페이지·공용 푸터"
 
 - [ ] **Step 1: 린트**
 
-Run: `cd /Users/kwonsangjae/Desktop/app/pages-nextjs && npm run lint`
+Run: `cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs && npm run lint`
 Expected: 에러 0건 (기존 데모 페이지 경고는 무시 가능, 새 파일 에러는 수정)
 
 - [ ] **Step 2: 프로덕션 서버로 전 경로 검증**
 
 ```bash
-cd /Users/kwonsangjae/Desktop/app/pages-nextjs
+cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs
 npm run build
 npm run start & SERVER_PID=$!
 sleep 3
@@ -642,7 +642,7 @@ Expected: 다섯 경로 모두 `200`, 마지막 출력이 정확히 `google.com,
 1. https://github.com/new 에서 repo 생성 (예: `sangjaelabs-pages`, private 가능)
 2. 로컬에서:
    ```bash
-   cd /Users/kwonsangjae/Desktop/app/pages-nextjs
+   cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs
    git remote add origin git@github.com:<계정>/sangjaelabs-pages.git
    git push -u origin main
    ```
