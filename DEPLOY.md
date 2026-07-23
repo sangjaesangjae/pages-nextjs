@@ -2,36 +2,28 @@
 
 코드는 완성되어 있습니다. 아래는 계정 권한이 필요해 직접 하셔야 하는 작업입니다. 순서대로 진행하세요.
 
-## 1. GitHub repo 생성 + push
+## 1. GitHub repo 생성 + push ✅ 완료
 
-1. https://github.com/new 에서 repo 생성 (예: `sangjaelabs-pages`, private 가능)
-2. 로컬에서:
-   ```bash
-   cd /Users/kwonsangjae/Desktop/app/nemo-app/pages-nextjs
-   git remote add origin git@github.com:<계정>/sangjaelabs-pages.git
-   git push -u origin main
-   ```
+- repo: https://github.com/sangjaesangjae/pages-nextjs (`main`)
 
-## 2. Vercel 연동 (자동 배포)
+## 2. Vercel 연동 (자동 배포) ✅ 완료
 
-1. https://vercel.com 에 GitHub 계정으로 로그인
-2. Add New → Project → 위 repo Import
-3. 설정 변경 없이 Deploy (Next.js 자동 감지)
-4. 이후 `git push`할 때마다 자동 배포됩니다
+- 프로젝트: `pages-nextjs` (sangjae-9394s-projects)
+- Framework Preset: **Next.js** (Import 때 "Other"로 잡혀 페이지가 전부 404 났었음 — 재발 시 Settings → Build & Development에서 확인)
+- 이후 `git push`할 때마다 자동 배포됩니다
 
-## 3. 도메인 연결
+## 3. 도메인 연결 ✅ 완료
 
-1. Vercel 프로젝트 → Settings → Domains → `www.sangjaelabs.com` 추가
-2. 도메인 구입처(DNS 관리) → `www` CNAME 레코드를 `cname.vercel-dns.com`으로 설정
-3. apex(`sangjaelabs.com`)도 쓰려면 Vercel Domains 화면에 표시되는 DNS 값을 그대로 입력 → www로 리다이렉트 설정
-4. 전파 후 https://www.sangjaelabs.com/app-ads.txt 접속 확인
+- 서비스 도메인: `nemo.sangjaelabs.com`
+- 가비아 DNS: `nemo` CNAME → `02f17b4bb7a74096.vercel-dns-017.com` (Vercel Domains 화면에 표시된 값)
+- 확인: https://nemo.sangjaelabs.com/app-ads.txt
 
 ## 4. App Store Connect URL 입력
 
 앱 심사 제출 시:
-- 개인정보 처리방침 URL: `https://www.sangjaelabs.com/privacy`
-- 지원 URL: `https://www.sangjaelabs.com/support`
-- 마케팅 URL: `https://www.sangjaelabs.com`
+- 개인정보 처리방침 URL: `https://nemo.sangjaelabs.com/privacy`
+- 지원 URL: `https://nemo.sangjaelabs.com/support`
+- 마케팅 URL: `https://nemo.sangjaelabs.com`
 
 ## 5. AdMob app-ads.txt 인증
 

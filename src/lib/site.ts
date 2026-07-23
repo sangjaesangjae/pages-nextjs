@@ -1,5 +1,5 @@
 export const site = {
-  url: "https://www.sangjaelabs.com",
+  url: "https://nemo.sangjaelabs.com",
   name: "Sangjae Labs",
   appName: "네모",
   description:
