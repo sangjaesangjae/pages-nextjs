@@ -23,7 +23,7 @@
 
 1. Vercel 프로젝트 → Settings → Domains → `www.sangjaelabs.com` 추가
 2. 도메인 구입처(DNS 관리) → `www` CNAME 레코드를 `cname.vercel-dns.com`으로 설정
-3. apex(`sangjaelabs.com`)도 쓰려면 Vercel 안내에 따라 A 레코드(76.76.21.21) 추가 → www로 리다이렉트 설정
+3. apex(`sangjaelabs.com`)도 쓰려면 Vercel Domains 화면에 표시되는 DNS 값을 그대로 입력 → www로 리다이렉트 설정
 4. 전파 후 https://www.sangjaelabs.com/app-ads.txt 접속 확인
 
 ## 4. App Store Connect URL 입력
@@ -45,7 +45,7 @@
   ```tsx
   <a
     href="https://apps.apple.com/kr/app/<앱ID>"
-    className="mt-10 inline-flex h-9 items-center justify-center rounded-full bg-primary px-5 text-on-primary"
+    className="mt-10 inline-flex h-9 items-center justify-center rounded-full bg-primary px-5 text-on-primary text-sm font-medium leading-none"
   >
     App Store에서 다운로드
   </a>

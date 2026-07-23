@@ -19,6 +19,10 @@ import {
   type TypographyToken,
 } from "@/design-system";
 
+export const metadata = {
+  robots: { index: false },
+};
+
 const colorSwatches: { name: string; className: string; hex: string }[] = [
   { name: "primary", className: "bg-primary", hex: "#000000" },
   { name: "ink-deep", className: "bg-ink-deep", hex: "#090909" },
