@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { SiteFooter } from "@/components/SiteFooter";
 
 // Display face only — body and code stay on the OS-native stack (see design-system/tokens.css)
 const nunito = Nunito({
@@ -33,6 +34,7 @@ export default function RootLayout({
     <html lang="ko" className={`${nunito.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-canvas text-ink font-sans">
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
