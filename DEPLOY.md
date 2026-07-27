@@ -1,45 +1,51 @@
-# 배포 가이드 (수동 작업 체크리스트)
+# 배포 가이드 (Cloudflare Pages)
 
-코드는 완성되어 있습니다. 아래는 계정 권한이 필요해 직접 하셔야 하는 작업입니다. 순서대로 진행하세요.
+> Vercel Hobby는 약관상 비상업 용도 한정이라 **Cloudflare Pages**(무료 티어 상업 사용 허용, 정적 대역폭 무제한)로 운영한다. 빌드는 정적 export(`next.config.ts`의 `output: "export"` → 산출물 `out/`).
 
-## 브랜치 운영
+## 브랜치 운영 모델
 
-- **main = 앱 중립 템플릿.** 앱별 콘텐츠는 두지 않는다 — `src/lib/site.ts`의 placeholder와 공용 구조만 유지한다.
-- **앱 하나 = 브랜치 하나.** 예: 네모네모는 `nemo` 브랜치에 실제 콘텐츠가 있다 (`site.ts` 값·페이지 프로즈 모두 nemo 전용으로 채워짐 — main에는 없음).
-- 새 앱을 추가할 때: main에서 새 브랜치를 따고 `src/lib/site.ts` 값을 교체 → push (Vercel 자동 배포) → Vercel에서 도메인을 그 브랜치에 지정.
-- **Vercel 도메인 → 브랜치 지정**: Vercel 대시보드 → 프로젝트(`pages-nextjs`) → **Settings → Domains** → 대상 도메인 옆 **Edit** → **Git Branch**에서 브랜치 선택 후 저장. 브랜치마다 도메인을 하나씩 매핑한다.
-- 새 앱 도메인의 가비아 DNS CNAME 등록 절차는 아래 **§3 도메인 연결** 참조 — 단, §3에 적힌 실제 값(`nemo.sangjaelabs.com` 등)은 **nemo 브랜치 기준 예시**이며, 새 앱은 자신의 서브도메인으로 대체한다.
+- **main = 앱 중립 템플릿.** 앱별 콘텐츠는 두지 않는다 — `src/lib/site.ts` placeholder와 공용 구조만.
+- **앱 하나 = 브랜치 하나 = Cloudflare Pages 프로젝트 하나.** 같은 GitHub 레포로 프로젝트를 여러 개 만들고, 각 프로젝트의 **production 브랜치를 그 앱 브랜치로** 지정한다 (예: 프로젝트 `nemo-pages` → production branch `nemo`). 커스텀 도메인은 각 프로젝트에 붙인다 — 브랜치별 도메인이 공식 지원 경로로 해결된다.
+- 새 앱 추가: main에서 브랜치 따기 → `site.ts` 값 교체·페이지 채우기 → push → 아래 §1 절차로 프로젝트 생성·도메인 연결 → main README 앱 인덱스에 행 추가.
 
-## 1. GitHub repo 생성 + push ✅ 완료
+## 0. 최초 1회 준비
 
-- repo: https://github.com/sangjaesangjae/pages-nextjs (`main`)
+- `wrangler login` (Cloudflare 계정 OAuth — 이후 모든 배포가 CLI로 가능해짐)
+- **권장:** `sangjaelabs.com` 네임서버를 Cloudflare로 이전(무료) — 하면 앱 도메인 연결까지 완전 자동(가비아 CNAME 수동 작업 소멸). 안 하면 앱마다 가비아 CNAME 1건만 수동.
 
-## 2. Vercel 연동 (자동 배포) ✅ 완료
+## 1. 앱 배포 (앱마다 — wrangler로 전부 자동, factory-ship이 실행)
 
-- 프로젝트: `pages-nextjs` (sangjae-9394s-projects)
-- Framework Preset: **Next.js** (Import 때 "Other"로 잡혀 페이지가 전부 404 났었음 — 재발 시 Settings → Build & Development에서 확인)
-- 이후 `git push`할 때마다 자동 배포됩니다
+앱 브랜치를 체크아웃한 상태에서:
 
-## 3. 도메인 연결 (nemo 브랜치 기준 예시) ✅ 완료
+```bash
+npx wrangler pages project create <앱영문명>-pages --production-branch <앱브랜치>
+npm run build
+npx wrangler pages deploy out --project-name <앱영문명>-pages --branch <앱브랜치>
+```
 
-- 서비스 도메인: `nemo.sangjaelabs.com`
-- 가비아 DNS: `nemo` CNAME → `02f17b4bb7a74096.vercel-dns-017.com` (Vercel Domains 화면에 표시된 값)
-- 확인: https://nemo.sangjaelabs.com/app-ads.txt
+배포 확인: `https://<앱영문명>-pages.pages.dev`. 이후 페이지 수정 시 build+deploy 두 줄만 재실행 (direct-upload 방식 — git push 자동배포 대신 배포 명령을 스킬이 실행한다. 소스 진실은 여전히 이 레포의 앱 브랜치).
 
-## 4. App Store Connect URL 입력 (nemo 브랜치 기준 예시)
+## 2. 커스텀 도메인 연결 (앱마다 1회)
 
-앱 심사 제출 시 (아래는 nemo 브랜치 예시 — 새 앱은 자신의 도메인으로 대체):
-- 개인정보 처리방침 URL: `https://nemo.sangjaelabs.com/privacy`
-- 지원 URL: `https://nemo.sangjaelabs.com/support`
-- 마케팅 URL: `https://nemo.sangjaelabs.com`
+- **네임서버가 Cloudflare면(권장):** `npx wrangler pages domain add <앱>.sangjaelabs.com --project-name <앱영문명>-pages` — DNS까지 자동. (wrangler 버전에 domain 서브커맨드가 없으면 대시보드 Custom domains에서 추가 — Cloudflare DNS라 레코드는 자동 생성됨)
+- **가비아 DNS 유지 시:** 대시보드 Custom domains에 `<앱>.sangjaelabs.com` 추가 + 가비아에서 `<앱>` CNAME → `<앱영문명>-pages.pages.dev` 등록
+- 확인: `https://<앱>.sangjaelabs.com/app-ads.txt`
 
-## 5. AdMob app-ads.txt 인증
+> **nemo 마이그레이션 순서 (무중단):** `nemo` 브랜치 체크아웃 → §1 명령으로 `nemo-pages` 생성·배포 → pages.dev 확인 → 도메인 전환(§2) → `https://nemo.sangjaelabs.com` 정상 확인 → 그때 Vercel 프로젝트 삭제 + main(템플릿) push 가능.
+
+## 3. App Store Connect URL 입력 (앱마다)
+
+- 개인정보 처리방침 URL: `https://<앱>.sangjaelabs.com/privacy`
+- 지원 URL: `https://<앱>.sangjaelabs.com/support`
+- 마케팅 URL: `https://<앱>.sangjaelabs.com`
+
+## 4. AdMob app-ads.txt 인증
 
 1. 앱이 App Store에 **게시된 후** AdMob 콘솔 → 앱 → 앱 설정에서 스토어 앱과 연결
 2. App Store의 마케팅 URL이 이 사이트 도메인이어야 AdMob이 `app-ads.txt`를 크롤링합니다
 3. AdMob 콘솔 → 앱 → app-ads.txt 탭에서 확인 (크롤링까지 최대 24시간)
 
-## 출시 후 코드 수정 1건
+## 출시 후 코드 수정 1건 (앱 브랜치에서)
 
 - `src/app/page.tsx`의 "App Store 출시 준비 중" `Button`을 앱스토어 링크로 교체:
   ```tsx
@@ -50,3 +56,7 @@
     App Store에서 다운로드
   </a>
   ```
+
+## 기록 (과거)
+
+- 초기 배포는 Vercel(`pages-nextjs`, sangjae-9394s-projects)이었고 `nemo.sangjaelabs.com` CNAME이 `02f17b4bb7a74096.vercel-dns-017.com`을 가리켰다 — Cloudflare 이전 완료 후 Vercel 프로젝트는 삭제한다.

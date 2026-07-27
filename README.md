@@ -4,7 +4,7 @@ Sangjae Labs 앱들의 공식 페이지(랜딩·개인정보 처리방침·지�
 
 - **main = 템플릿.** 앱 콘텐츠를 두지 않는다 — placeholder(`src/lib/site.ts`)와 공용 구조만.
 - **앱 하나 = 브랜치 하나.** 각 앱 페이지는 main에서 딴 브랜치에 산다.
-- 배포는 Vercel 자동 (push 시). 앱 도메인(`<앱>.sangjaelabs.com`)은 Vercel에서 해당 브랜치에 지정한다.
+- 배포는 **Cloudflare Pages** (push 시 자동, 정적 export). 앱마다 Pages 프로젝트 1개 — production 브랜치를 그 앱 브랜치로 지정하고 도메인(`<앱>.sangjaelabs.com`)을 붙인다.
 
 ## 앱 인덱스
 
@@ -19,7 +19,7 @@ Sangjae Labs 앱들의 공식 페이지(랜딩·개인정보 처리방침·지�
 1. `git checkout main && git pull && git checkout -b <앱영문명>`
 2. `src/lib/site.ts`의 값 교체 (url·appName·description — 파일 상단 주석 참조)
 3. 필요 시 페이지 문구·정책 내용 커스텀 → `npm run build` 확인 → push
-4. Vercel 대시보드 → pages-nextjs → Settings → Domains → `<앱>.sangjaelabs.com` 추가 후 Git Branch를 이 브랜치로 지정 (가비아 DNS CNAME은 DEPLOY.md 참조)
+4. Cloudflare Pages 프로젝트 생성(production 브랜치=이 브랜치) + 도메인 연결 — DEPLOY.md §1·§2 참조
 5. main으로 돌아와 위 앱 인덱스에 행 추가 커밋
 
 앱스토어 심사에 넣는 URL: 개인정보 처리방침 `https://<앱>.sangjaelabs.com/privacy`, 지원 `https://<앱>.sangjaelabs.com/support`, 마케팅 `https://<앱>.sangjaelabs.com`
