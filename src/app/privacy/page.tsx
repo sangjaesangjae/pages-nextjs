@@ -52,7 +52,7 @@ export default function PrivacyPage() {
 
       <Section title="1. 총칙">
         <Body>
-          {site.name}(이하 &ldquo;개발자&rdquo;)는 모바일 퍼즐 게임
+          {site.name}(이하 &ldquo;개발자&rdquo;)는 모바일 앱
           &lsquo;{site.appName}&rsquo;(이하 &ldquo;앱&rdquo;) 이용자의
           개인정보를 소중히 여기며, 「개인정보 보호법」 등 관련 법령을
           준수합니다. 본 방침은 앱 이용 과정에서 어떤 정보가 처리되는지, 그
@@ -67,9 +67,9 @@ export default function PrivacyPage() {
           수집하거나 개발자의 서버로 전송·저장하지 않습니다.
         </Body>
         <Body>
-          퍼즐 진행 상황, 클리어 기록, 획득 포인트, 앱 설정 값 등 게임 데이터는
-          이용자 기기의 내부 저장소에만 저장되며, 개발자는 여기에 접근할 수
-          없습니다.
+          앱 이용 데이터(예: 진행 상황·설정 값 등)는 이용자 기기의 내부
+          저장소에만 저장되며, 개발자는 여기에 접근할 수 없습니다.
+          {/* 새 앱: 실제 수집 항목에 맞게 수정 */}
         </Body>
       </Section>
 
@@ -133,7 +133,7 @@ export default function PrivacyPage() {
 
       <Section title="6. 개인정보의 보유 및 파기">
         <Body>
-          개발자가 직접 보유하는 개인정보는 없습니다. 기기에 저장된 게임
+          개발자가 직접 보유하는 개인정보는 없습니다. 기기에 저장된 앱 이용
           데이터는 이용자가 앱을 삭제하면 함께 삭제되며, 삭제된 데이터는
           복구할 수 없습니다.
         </Body>
@@ -164,7 +164,7 @@ export default function PrivacyPage() {
             </>,
             <>
               <strong>데이터 삭제:</strong> 앱을 삭제하면 기기에 저장된 모든
-              게임 데이터가 함께 삭제됩니다
+              앱 이용 데이터가 함께 삭제됩니다
             </>,
           ]}
         />

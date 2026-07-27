@@ -31,8 +31,8 @@ export default function SupportPage() {
         </Text>
         <div className="mt-4">
           <FaqRow
-            question="퍼즐 진행 상황은 어디에 저장되나요?"
-            answer="모든 진행 상황은 이용자의 기기 안에만 저장됩니다. 앱을 삭제하면 진행 상황도 함께 삭제되니 주의해 주세요."
+            question="이용 데이터는 어디에 저장되나요?"
+            answer="앱 이용 데이터는 이용자의 기기 안에만 저장됩니다. 앱을 삭제하면 데이터도 함께 삭제되니 주의해 주세요."
           />
           <FaqRow
             question="광고가 표시되지 않거나 앱이 느려요."

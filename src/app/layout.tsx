@@ -14,7 +14,7 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.appName} — 네모로직 퍼즐 | ${site.name}`,
+    default: `${site.appName} | ${site.name}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,

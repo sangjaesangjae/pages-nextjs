@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# pages-nextjs — 앱 웹페이지 모음
 
-## Getting Started
+Sangjae Labs 앱들의 공식 페이지(랜딩·개인정보 처리방침·지원)를 한 레포에서 관리한다.
 
-First, run the development server:
+- **main = 템플릿.** 앱 콘텐츠를 두지 않는다 — placeholder(`src/lib/site.ts`)와 공용 구조만.
+- **앱 하나 = 브랜치 하나.** 각 앱 페이지는 main에서 딴 브랜치에 산다.
+- 배포는 Vercel 자동 (push 시). 앱 도메인(`<앱>.sangjaelabs.com`)은 Vercel에서 해당 브랜치에 지정한다.
+
+## 앱 인덱스
+
+| 앱 | 설명 | 페이지 | 브랜치 |
+|----|------|--------|--------|
+| 네모네모 | 가로·세로 숫자 힌트로 숨겨진 그림을 완성하는 네모로직 퍼즐 게임 | https://nemo.sangjaelabs.com | `nemo` |
+
+> 새 앱을 추가하면 이 표에 행을 추가한다 (main 브랜치에서 커밋).
+
+## 새 앱 페이지 만들기
+
+1. `git checkout main && git pull && git checkout -b <앱영문명>`
+2. `src/lib/site.ts`의 값 교체 (url·appName·description — 파일 상단 주석 참조)
+3. 필요 시 페이지 문구·정책 내용 커스텀 → `npm run build` 확인 → push
+4. Vercel 대시보드 → pages-nextjs → Settings → Domains → `<앱>.sangjaelabs.com` 추가 후 Git Branch를 이 브랜치로 지정 (가비아 DNS CNAME은 DEPLOY.md 참조)
+5. main으로 돌아와 위 앱 인덱스에 행 추가 커밋
+
+앱스토어 심사에 넣는 URL: 개인정보 처리방침 `https://<앱>.sangjaelabs.com/privacy`, 지원 `https://<앱>.sangjaelabs.com/support`, 마케팅 `https://<앱>.sangjaelabs.com`
+
+## 개발
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install && npm run dev   # http://localhost:3000
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
