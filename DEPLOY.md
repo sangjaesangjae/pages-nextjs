@@ -8,10 +8,10 @@
 - **앱 하나 = 브랜치 하나 = Cloudflare Pages 프로젝트 하나.** 같은 GitHub 레포로 프로젝트를 여러 개 만들고, 각 프로젝트의 **production 브랜치를 그 앱 브랜치로** 지정한다 (예: 프로젝트 `nemo-pages` → production branch `nemo`). 커스텀 도메인은 각 프로젝트에 붙인다 — 브랜치별 도메인이 공식 지원 경로로 해결된다.
 - 새 앱 추가: main에서 브랜치 따기 → `site.ts` 값 교체·페이지 채우기 → push → 아래 §1 절차로 프로젝트 생성·도메인 연결 → main README 앱 인덱스에 행 추가.
 
-## 0. 최초 1회 준비
+## 0. 최초 1회 준비 ✅ 완료 (2026-07-28)
 
-- `wrangler login` (Cloudflare 계정 OAuth — 이후 모든 배포가 CLI로 가능해짐)
-- **권장:** `sangjaelabs.com` 네임서버를 Cloudflare로 이전(무료) — 하면 앱 도메인 연결까지 완전 자동(가비아 CNAME 수동 작업 소멸). 안 하면 앱마다 가비아 CNAME 1건만 수동.
+- `wrangler login` ✅ — 이후 모든 배포·도메인 연결이 CLI/API로 가능
+- `sangjaelabs.com` 네임서버 Cloudflare 이전 ✅ (megan/derek.ns.cloudflare.com) — 앱 도메인 연결까지 완전 자동. iCloud 메일 레코드 5종(MX×2·SPF·apple 인증·DKIM) 이전 검증 완료.
 
 ## 1. 앱 배포 (앱마다 — wrangler로 전부 자동, factory-ship이 실행)
 
@@ -25,11 +25,15 @@ npx wrangler pages deploy out --project-name <앱영문명>-pages --branch <앱�
 
 배포 확인: `https://<앱영문명>-pages.pages.dev`. 이후 페이지 수정 시 build+deploy 두 줄만 재실행 (direct-upload 방식 — git push 자동배포 대신 배포 명령을 스킬이 실행한다. 소스 진실은 여전히 이 레포의 앱 브랜치).
 
-## 2. 커스텀 도메인 연결 (앱마다 1회)
+## 2. 커스텀 도메인 연결 (앱마다 1회 — API로 완전 자동)
 
-- **네임서버가 Cloudflare면(권장):** `npx wrangler pages domain add <앱>.sangjaelabs.com --project-name <앱영문명>-pages` — DNS까지 자동. (wrangler 버전에 domain 서브커맨드가 없으면 대시보드 Custom domains에서 추가 — Cloudflare DNS라 레코드는 자동 생성됨)
-- **가비아 DNS 유지 시:** 대시보드 Custom domains에 `<앱>.sangjaelabs.com` 추가 + 가비아에서 `<앱>` CNAME → `<앱영문명>-pages.pages.dev` 등록
-- 확인: `https://<앱>.sangjaelabs.com/app-ads.txt`
+wrangler v4에는 domain 서브커맨드가 **없다** — wrangler OAuth 토큰으로 Cloudflare API를 직접 호출한다 (nemo 마이그레이션에서 검증된 방식, 정확한 명령은 `app-factory/skills/factory-ship/references/app-page.md` ⑤):
+
+1. 존 DNS에 CNAME 생성: `POST /zones/<존ID>/dns_records` — `<앱>` → `<앱영문명>-pages.pages.dev`, proxied
+2. Pages 프로젝트에 도메인 등록: `POST /accounts/<계정>/pages/projects/<앱영문명>-pages/domains` (이미 등록돼 pending이면 `PATCH .../domains/<도메인>`으로 재검증)
+3. 인증서 발급 1~5분 대기 → 확인: `https://<앱>.sangjaelabs.com/app-ads.txt` 200
+
+대시보드 폴백: 프로젝트 → Custom domains → Set up a custom domain (존이 같은 계정이라 즉시 활성).
 
 > **nemo 마이그레이션 순서 (무중단):** `nemo` 브랜치 체크아웃 → §1 명령으로 `nemo-pages` 생성·배포 → pages.dev 확인 → 도메인 전환(§2) → `https://nemo.sangjaelabs.com` 정상 확인 → 그때 Vercel 프로젝트 삭제 + main(템플릿) push 가능.
 
