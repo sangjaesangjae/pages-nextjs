@@ -1,2 +1,107 @@
 @import "tailwindcss";
 @import "../design-system/tokens.css";
+
+/* ---------------------------------------------------------------------------
+ * MoodCam 뷰파인더 히어로 — 앱의 카메라 화면 UI를 웹으로 재현.
+ * 코너 브래킷 + REC 점멸 + 3분할 그리드 + 주황 타임스탬프 번인.
+ * ------------------------------------------------------------------------- */
+
+/* 뷰파인더 코너 브래킷 4개 */
+.viewfinder {
+  position: relative;
+}
+
+.viewfinder::before,
+.viewfinder::after,
+.viewfinder > .vf-corners::before,
+.viewfinder > .vf-corners::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2.5px solid rgb(245 245 247 / 0.8);
+}
+
+.viewfinder::before {
+  top: 14px;
+  left: 14px;
+  border-right: none;
+  border-bottom: none;
+}
+.viewfinder::after {
+  top: 14px;
+  right: 14px;
+  border-left: none;
+  border-bottom: none;
+}
+.viewfinder > .vf-corners::before {
+  bottom: 14px;
+  left: 14px;
+  border-right: none;
+  border-top: none;
+}
+.viewfinder > .vf-corners::after {
+  bottom: 14px;
+  right: 14px;
+  border-left: none;
+  border-top: none;
+}
+
+/* 3분할 구도선 (앱의 GridOverlayView) */
+.vf-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(245 245 247 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(245 245 247 / 0.07) 1px, transparent 1px);
+  background-size: calc(100% / 3) calc(100% / 3);
+  background-position: -1px -1px;
+}
+
+/* REC 점멸 */
+.rec-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--color-rec);
+  animation: rec-blink 1.6s steps(1) infinite;
+}
+
+@keyframes rec-blink {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+/* 타임스탬프 번인 — LCD 주황 글로우 */
+.stamp {
+  font-family: var(--font-mono);
+  color: var(--color-stamp);
+  text-shadow: 0 0 6px rgb(255 158 13 / 0.55);
+  letter-spacing: 0.06em;
+}
+
+/* Y2K 글로우 (아이콘 그라디언트를 은은한 배경광으로만) */
+.y2k-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 34% at 18% 4%, rgb(64 224 255 / 0.12), transparent 70%),
+    radial-gradient(46% 38% at 85% 96%, rgb(255 61 173 / 0.1), transparent 70%);
+}
+
+/* 앵커 이동 */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec-dot {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

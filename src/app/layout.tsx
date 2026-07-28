@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-// Display face only — body and code stay on the OS-native stack (see design-system/tokens.css)
-const nunito = Nunito({
-  variable: "--font-nunito",
+// 본문은 앱과 동일한 시스템 스택. 캠코더 OSD·타임스탬프 표기만 모노 폰트를 쓴다.
+const osd = Share_Tech_Mono({
+  variable: "--font-osd",
+  weight: "400",
   subsets: ["latin"],
-  weight: ["500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.appName} | ${site.name}`,
+    default: `${site.appName} — Y2K 빈티지 카메라 | ${site.name}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -22,6 +24,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "ko_KR",
     type: "website",
+    images: [{ url: "/images/og.png", width: 512, height: 512 }],
   },
 };
 
@@ -31,8 +34,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${nunito.variable} h-full antialiased`}>
+    <html lang="ko" className={`${osd.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-canvas text-ink font-sans">
+        <SiteHeader />
         {children}
         <SiteFooter />
       </body>
