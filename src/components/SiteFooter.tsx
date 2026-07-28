@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 
 const links = [
   { label: "홈", href: "/" },
+  { label: "이용약관", href: "/terms" },
   { label: "개인정보 처리방침", href: "/privacy" },
   { label: "지원", href: "/support" },
 ];

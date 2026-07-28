@@ -18,7 +18,9 @@ Sangjae Labs 앱들의 공식 페이지(랜딩·개인정보 처리방침·지�
 
 1. `git checkout main && git pull && git checkout -b <앱영문명>`
 2. `src/lib/site.ts`의 값 교체 (url·appName·description — 파일 상단 주석 참조)
-3. 필요 시 페이지 문구·정책 내용 커스텀 → `npm run build` 확인 → push (자동 배포 아님
+3. 법적 페이지 손질: `terms`·`privacy`의 시행일 갱신 + 앱 특화 조항 구체화
+   (terms 파일 상단 ⚠️ 주석 참조 — 무광고 앱이면 광고 조항 삭제) → 필요 시 페이지
+   문구 커스텀 → `npm run build` 확인 → push (자동 배포 아님
    — 최초 배포·도메인 연결은 아래 4, 이후 재배포는 `npx wrangler pages deploy out
    --project-name <앱영문명>-pages --branch <앱브랜치>` 한 줄)
 4. Cloudflare Pages 프로젝트 생성(production 브랜치=이 브랜치) + 도메인 연결 — DEPLOY.md §1·§2 참조
