@@ -11,7 +11,7 @@ Sangjae Labs 앱들의 공식 페이지(랜딩·개인정보 처리방침·지�
 | 앱 | 설명 | 페이지 | 브랜치 |
 |----|------|--------|--------|
 | 네모네모 | 가로·세로 숫자 힌트로 숨겨진 그림을 완성하는 네모로직 퍼즐 게임 | https://nemo.sangjaelabs.com | `nemo` |
-| MoodCam | Y2K 디카 감성 실시간 필터 카메라 (완전 로컬) | https://moodcam.sangjaelabs.com (도메인 연결 대기 — 현재 https://moodcam-pages.pages.dev) | `moodcam` |
+| MoodCam | Y2K 디카 감성 실시간 필터 카메라 (완전 로컬) | https://moodcam.sangjaelabs.com | `moodcam` |
 
 > 새 앱을 추가하면 이 표에 행을 추가한다 (main 브랜치에서 커밋).
 

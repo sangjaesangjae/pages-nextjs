@@ -27,10 +27,11 @@ npx wrangler pages deploy out --project-name <앱영문명>-pages --branch <앱�
 
 ## 2. 커스텀 도메인 연결 (앱마다 1회 — API로 완전 자동)
 
-wrangler v4에는 domain 서브커맨드가 **없다** — wrangler OAuth 토큰으로 Cloudflare API를 직접 호출한다 (nemo 마이그레이션에서 검증된 방식, 정확한 명령은 `app-factory/skills/factory-ship/references/app-page.md` ⑤):
+wrangler v4에는 domain 서브커맨드가 **없다** — Cloudflare API를 직접 호출한다. 토큰은 단계별로 다르다 (정확한 명령은 `app-factory/skills/factory-ship/references/app-page.md` ⑤):
 
-1. 존 DNS에 CNAME 생성: `POST /zones/<존ID>/dns_records` — `<앱>` → `<앱영문명>-pages.pages.dev`, proxied
-2. Pages 프로젝트에 도메인 등록: `POST /accounts/<계정>/pages/projects/<앱영문명>-pages/domains` (이미 등록돼 pending이면 `PATCH .../domains/<도메인>`으로 재검증)
+1. 존 DNS에 CNAME 생성: `POST /zones/<존ID>/dns_records` — `<앱>` → `<앱영문명>-pages.pages.dev`, proxied.
+   **⚠️ wrangler OAuth 토큰으로는 불가**(스코프에 `dns_records:edit` 없음, zone:read뿐 — moodcam 연결 때 실증). **`~/.cloudflare/dns-token`**(Edit zone DNS 템플릿으로 발급한 API 토큰, sangjaelabs.com 존 한정)을 Bearer로 쓴다. 파일이 없으면 대시보드에서 1회 발급해 저장(권한 600).
+2. Pages 프로젝트에 도메인 등록: `POST /accounts/<계정>/pages/projects/<앱영문명>-pages/domains` — 이건 wrangler OAuth 토큰(pages:write)으로 가능 (이미 등록돼 pending이면 `PATCH .../domains/<도메인>`으로 재검증)
 3. 인증서 발급 1~5분 대기 → 확인: `https://<앱>.sangjaelabs.com/app-ads.txt` 200
 
 대시보드 폴백: 프로젝트 → Custom domains → Set up a custom domain (존이 같은 계정이라 즉시 활성).
