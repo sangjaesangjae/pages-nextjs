@@ -23,13 +23,24 @@ export function SiteHeader() {
           </span>
           <span className="font-display text-xl leading-none">{site.appName}</span>
         </NextLink>
-        <nav className="flex items-center gap-6">
-          <NextLink
-            href="/support"
-            className={cn(typography["body-sm-strong"], "text-body hover:text-ink transition-colors")}
-          >
-            지원
-          </NextLink>
+        <nav className="flex items-center gap-4 sm:gap-6">
+          {[
+            { label: "놀이법", href: "/#how" },
+            { label: "모드", href: "/#modes" },
+            { label: "FAQ", href: "/#faq" },
+            { label: "지원", href: "/support" },
+          ].map((link) => (
+            <NextLink
+              key={link.href}
+              href={link.href}
+              className={cn(
+                typography["body-sm-strong"],
+                "text-body hover:text-ink transition-colors",
+              )}
+            >
+              {link.label}
+            </NextLink>
+          ))}
         </nav>
       </div>
     </header>

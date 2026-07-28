@@ -9,7 +9,7 @@
 .nono-grid {
   --cell: clamp(19px, 4.6vw, 28px);
   display: grid;
-  grid-template-columns: 1.5rem repeat(10, var(--cell));
+  grid-template-columns: auto repeat(10, var(--cell));
   grid-auto-rows: auto;
   gap: 2px;
   align-items: stretch;
@@ -17,26 +17,32 @@
 
 .nono-hint {
   display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 0.72rem;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
   color: var(--color-hint);
   animation: nono-hint-dim 0.35s ease both;
   animation-delay: var(--d);
 }
 
+/* 열 힌트: 숫자를 세로로 쌓는다 (다중 구간 대응) */
 .nono-hint-col {
-  align-items: flex-end;
-  padding-bottom: 3px;
-  min-height: 1.4rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  padding-bottom: 4px;
 }
 
+/* 행 힌트: 숫자를 가로로 나열, 오른쪽 정렬 */
 .nono-hint-row {
+  align-items: center;
   justify-content: flex-end;
+  gap: 4px;
   padding-right: 7px;
+  min-width: 2.4rem;
 }
 
 .nono-cell {
@@ -52,13 +58,13 @@
   animation-delay: var(--d);
 }
 
-/* 완성 순간의 도안 색(나뭇잎)이 대각선 물결로 덮인다 */
+/* 완성 순간, 각 셀이 도안의 원래 색(--bc)으로 대각선 물결처럼 피어난다 */
 .nono-cell-fill::after {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: var(--color-leaf);
+  background: var(--bc, var(--color-leaf));
   opacity: 0;
   animation: nono-bloom 0.5s ease both;
   animation-delay: var(--b);
@@ -155,6 +161,15 @@
   to {
     transform: translateY(-14px) rotate(35deg);
   }
+}
+
+/* 앵커 이동: 부드럽게, 헤더에 가리지 않게 */
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 4.5rem;
 }
 
 /* 히어로 배경의 은은한 모눈 패턴 */
