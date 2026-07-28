@@ -1,44 +1,82 @@
 @theme {
+  /*
+   * 네모네모 디자인 토큰 — 앱의 AppColor.swift와 1:1 (Source: DESIGN.pen)
+   * 웜 크림 캔버스 + 새싹 그린 + 별 옐로우 + 다크 뉴트럴 잉크
+   */
+
   /* Brand & accent */
-  --color-primary: #000000;
-  --color-on-primary: #ffffff;
-  --color-ink-deep: #090909;
+  --color-primary: #74a93a; /* Brand.primaryGradientBottom — 단색 CTA */
+  --color-on-primary: #fffdf4;
+  --color-ink-deep: #2f4f17; /* Primary.step900 */
+  --color-sprout: #8bc34a; /* Brand.primary 새싹 그린 */
+  --color-sprout-deep: #74a93a;
+  --color-sprout-dark: #5e9c2e;
+  --color-sprout-tint: #f3f9e9; /* Background.brandTint */
+  --color-sprout-soft: #e3f2cb; /* Primary.step100 */
+  --color-star: #f7c948; /* Brand.secondary 별 옐로우 */
+  --color-star-soft: #fcefc0; /* Secondary.step100 */
+  --color-star-deep: #6f4e0e; /* Secondary.step900 */
+  --color-blush: #f5a79b; /* Brand.blush 볼터치 핑크 */
 
   /* Surface */
-  --color-canvas: #ffffff;
-  --color-surface-soft: #fafafa;
-  --color-surface-dark: #171717;
-  --color-hairline: #e5e5e5;
-  --color-hairline-strong: #d4d4d4;
+  --color-canvas: #fbf6e8; /* Background.primary 웜 크림 */
+  --color-surface-soft: #f5edd6; /* Background.tertiary */
+  --color-surface-dark: #2d2d2d; /* Neutral.step900 */
+  --color-paper: #fffdf4; /* Background.secondary */
+  --color-hairline: #ede4c8; /* Border.primary */
+  --color-hairline-strong: #e3d9bc; /* Game.cellBorder */
+
+  /* Game (네모로직 보드) */
+  --color-board: #f5edd6; /* Game.boardBackground */
+  --color-cell: #fffdf4; /* Game.cellEmpty */
+  --color-cell-border: #e3d9bc; /* Game.cellBorder */
+  --color-hint: #55832f; /* Game.hintText */
+  --color-hint-solved: #c9be9e; /* Game.hintSolved */
+  --color-leaf: #66bb6a; /* level-045 나뭇잎 팔레트 */
+  --color-celebrate: #7eac4e; /* Background.celebrate 클리어 그린 */
+  --color-celebrate-deep: #6e9c41;
+
+  /* Difficulty (앱 난이도 컬러) */
+  --color-diff-easy: #8bc34a;
+  --color-diff-easy-bg: #e3f2cb;
+  --color-diff-normal: #5fb5da;
+  --color-diff-normal-bg: #d9eef7;
+  --color-diff-hard: #ef9f33;
+  --color-diff-hard-bg: #fbeacb;
+  --color-diff-expert: #9b7ede;
+  --color-diff-expert-bg: #eae3f8;
 
   /* Text */
-  --color-ink: #000000;
-  --color-charcoal: #525252;
-  --color-body: #737373;
-  --color-mute: #a3a3a3;
-  --color-on-dark: #ffffff;
-  --color-on-dark-mute: rgb(255 255 255 / 0.7);
+  --color-ink: #2d2d2d; /* Text.primary */
+  --color-charcoal: #4f4b3d; /* Neutral.step700 */
+  --color-body: #7d7866; /* Text.secondary */
+  --color-mute: #b3ad98; /* Text.tertiary */
+  --color-on-dark: #fffdf4;
+  --color-on-dark-mute: rgb(255 253 244 / 0.78);
 
-  /* Semantic (terminal traffic lights) */
-  --color-terminal-red: #ff5f56;
-  --color-terminal-yellow: #ffbd2e;
-  --color-terminal-green: #27c93f;
+  /* Semantic */
+  --color-terminal-red: #ff5c5c; /* Error.step500 */
+  --color-terminal-yellow: #f7c948;
+  --color-terminal-green: #7fb544; /* Success.step500 */
 
   /* Focus */
-  --color-focus-ring: rgb(59 130 246 / 0.5);
+  --color-focus-ring: rgb(139 195 74 / 0.55);
 
-  /* Radius: pill (full) + 12px cards is the entire shape vocabulary */
+  /* Radius: 앱은 둥근 카드(16–24px) + pill 버튼 */
   --radius-none: 0px;
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Fonts: display face used sparingly, body/code stay OS-native */
-  --font-display: var(--font-nunito), ui-rounded, "SF Pro Rounded", system-ui, -apple-system, sans-serif;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  /* Fonts: 앱과 동일 — Jua(디스플레이) + 나눔스퀘어라운드(본문) */
+  --font-display: var(--font-jua), "Jua", ui-rounded, "Apple SD Gothic Neo", sans-serif;
+  --font-sans: var(--font-nanum), "NanumSquareRound", ui-rounded, "Apple SD Gothic Neo",
+    system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
 
-  /* Section rhythm: the single largest spacing token, used between major blocks */
-  --spacing-section: 88px;
+  /* Section rhythm */
+  --spacing-section: 96px;
 }

@@ -1,14 +1,26 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Jua } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-// Display face only — body and code stay on the OS-native stack (see design-system/tokens.css)
-const nunito = Nunito({
-  variable: "--font-nunito",
+// 앱과 동일한 폰트 페어링 — Jua(디스플레이) + 나눔스퀘어라운드(본문, 서브셋 woff2 자체 호스팅)
+const jua = Jua({
+  variable: "--font-jua",
+  weight: "400",
   subsets: ["latin"],
-  weight: ["500", "600"],
+  display: "swap",
+});
+
+const nanum = localFont({
+  src: [
+    { path: "../fonts/NanumSquareRoundR.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/NanumSquareRoundB.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-nanum",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -22,6 +34,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "ko_KR",
     type: "website",
+    images: [{ url: "/images/og.png", width: 512, height: 512 }],
   },
 };
 
@@ -31,8 +44,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${nunito.variable} h-full antialiased`}>
+    <html lang="ko" className={`${jua.variable} ${nanum.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-canvas text-ink font-sans">
+        <SiteHeader />
         {children}
         <SiteFooter />
       </body>

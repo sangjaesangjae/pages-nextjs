@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#090909"/>
-  <g fill="#ffffff">
-    <rect x="18" y="18" width="18" height="18" rx="3"/>
-    <rect x="41" y="18" width="18" height="18" rx="3"/>
-    <rect x="64" y="18" width="18" height="18" rx="3" fill-opacity="0.25"/>
-    <rect x="18" y="41" width="18" height="18" rx="3" fill-opacity="0.25"/>
-    <rect x="41" y="41" width="18" height="18" rx="3"/>
-    <rect x="64" y="41" width="18" height="18" rx="3"/>
-    <rect x="18" y="64" width="18" height="18" rx="3"/>
-    <rect x="41" y="64" width="18" height="18" rx="3" fill-opacity="0.25"/>
-    <rect x="64" y="64" width="18" height="18" rx="3"/>
+  <rect width="100" height="100" rx="22" fill="#8BC34A"/>
+  <g>
+    <rect x="18" y="18" width="18" height="18" rx="4" fill="#FFFDF4"/>
+    <rect x="41" y="18" width="18" height="18" rx="4" fill="#FFFDF4"/>
+    <rect x="64" y="18" width="18" height="18" rx="4" fill="#FFFDF4" fill-opacity="0.35"/>
+    <rect x="18" y="41" width="18" height="18" rx="4" fill="#FFFDF4" fill-opacity="0.35"/>
+    <rect x="41" y="41" width="18" height="18" rx="4" fill="#F7C948"/>
+    <rect x="64" y="41" width="18" height="18" rx="4" fill="#FFFDF4"/>
+    <rect x="18" y="64" width="18" height="18" rx="4" fill="#FFFDF4"/>
+    <rect x="41" y="64" width="18" height="18" rx="4" fill="#FFFDF4" fill-opacity="0.35"/>
+    <rect x="64" y="64" width="18" height="18" rx="4" fill="#FFFDF4"/>
   </g>
 </svg>
