@@ -21,6 +21,7 @@ export function SiteHeader() {
         <nav className="flex items-center gap-4 sm:gap-6">
           {[
             { label: "사용법", href: "/#how" },
+            { label: "미리보기", href: "/#screens" },
             { label: "기능", href: "/#features" },
             { label: "FAQ", href: "/#faq" },
             { label: "지원", href: "/support" },

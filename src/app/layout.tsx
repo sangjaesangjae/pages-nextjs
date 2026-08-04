@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "ko_KR",
     type: "website",
+    // ⚠️ 새 앱: public/og.png를 앱 브랜드 소셜 카드(1200×630)로 교체한다 —
+    // 브랜드 배경 + 마스코트/히어로 요소 + 한 줄 카피. 선례: meokkum 브랜치
+    // (밤하늘+먹꿈이, browse 헤드리스 렌더로 생성).
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og.png"],
   },
 };
 

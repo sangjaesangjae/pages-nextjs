@@ -10,17 +10,21 @@ export const metadata: Metadata = {
 
 /* ⚠️ 템플릿 placeholder — 새 앱 브랜치에서 전 섹션을 앱 내용으로 채운다.
  *
- * 이 스캐폴드는 nemo·meokkum 랜딩에서 검증된 6섹션 구조다. 순서 그대로 두고
+ * 이 스캐폴드는 nemo·meokkum 랜딩에서 검증된 8섹션 구조다. 순서 그대로 두고
  * 내용만 교체하는 것을 권장한다:
- *   ① 히어로(카피 + 라이브 데모) ② 사용법 3단계 ③ 기능 3종
- *   ④ 도메인 칩 스트립 ⑤ FAQ ⑥ 마무리 CTA(마스코트)
+ *   ① 히어로(카피 + 라이브 데모) ② 사용법 3단계 ③ 앱 미리보기(실촬영 갤러리)
+ *   ④ 기능 3종 ⑤ 콘텐츠 미리보기 ⑥ 도메인 칩 스트립 ⑦ FAQ ⑧ 마무리 CTA(마스코트)
  *
- * 필수 이식 3종 (app-factory factory-ship/references/app-page.md):
+ * 필수 이식 (app-factory factory-ship/references/app-page.md):
  *   1. 토큰 — 앱 AppColor 값을 design-system/tokens.css에
  *   2. 폰트 — 앱 폰트를 pyftsubset(KS X 1001)으로 woff2 서브셋해 src/fonts/에
  *   3. 히어로 데모 — 앱의 핵심 루프를 CSS 애니메이션으로 재생하는 컴포넌트
  *      (선례: nemo NonogramBoard — 스스로 풀리는 보드,
  *             meokkum DreamDemo — 받아쓰기→상징 감지→길몽 판정)
+ *   4. 스크린샷 갤러리 — 시뮬레이터 실촬영 4장(상태바 crop, 폭 750 JPEG)을
+ *      public/images/screens/에 (선례: meokkum — 홈·팁·해몽·사전)
+ *   5. 콘텐츠 미리보기 — 앱 번들 콘텐츠(사전·도안·프리셋 등)에서 실물 발췌
+ *   6. OG 카드 — public/og.png를 앱 브랜드 1200×630으로 교체 (layout.tsx 주석)
  */
 
 const routine = [
@@ -156,7 +160,37 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── ③ 기능 3종 ────────────────────────────────────────────────── */}
+        {/* ── ③ 앱 미리보기 — 시뮬레이터 실촬영 갤러리 슬롯 ─────────────── */}
+        {/* 새 앱: public/images/screens/*.jpg 4장(상태바 crop·폭 750)을 넣고
+            아래 placeholder 박스를 <Image> 4장으로 교체한다. 선례: meokkum. */}
+        <section id="screens" className="px-6 pb-24">
+          <div className="mx-auto w-full max-w-5xl">
+            <Text as="h2" variant="display-lg" className="text-center text-ink">
+              미리 둘러보기
+            </Text>
+            <div className="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-4">
+              {["화면 1", "화면 2", "화면 3", "화면 4"].map((label) => (
+                <figure key={label}>
+                  <div className="flex aspect-[750/1514] items-center justify-center overflow-hidden rounded-lg border border-hairline bg-surface-soft">
+                    <Text as="span" variant="caption-sm" className="text-mute">
+                      {label} 스크린샷
+                    </Text>
+                  </div>
+                  <figcaption className="mt-3">
+                    <Text as="span" variant="body-sm-strong" className="block text-ink">
+                      {label} 제목
+                    </Text>
+                    <Text as="span" variant="caption-sm" className="mt-0.5 block text-body">
+                      한 줄 설명
+                    </Text>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── ④ 기능 3종 ────────────────────────────────────────────────── */}
         <section id="features" className="px-6 pb-24">
           <div className="mx-auto w-full max-w-5xl">
             <Text as="h2" variant="display-lg" className="text-center text-ink">
@@ -178,7 +212,30 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── ④ 도메인 칩 스트립 ────────────────────────────────────────── */}
+        {/* ── ⑤ 콘텐츠 미리보기 — 앱 번들 콘텐츠 실물 발췌 슬롯 ─────────── */}
+        {/* 새 앱: 번들 JSON(사전·도안·프리셋 등)에서 4~6개를 발췌해 카드로.
+            "콘텐츠가 진짜 있다"를 보여주는 가장 싼 방법. 선례: meokkum 상징 6장. */}
+        <section className="px-6 pb-24">
+          <div className="mx-auto w-full max-w-5xl">
+            <Text as="h2" variant="display-lg" className="text-center text-ink">
+              콘텐츠 미리보기 섹션 제목
+            </Text>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {["항목 1", "항목 2", "항목 3"].map((name) => (
+                <article key={name} className="rounded-lg border border-hairline bg-surface-soft p-5">
+                  <Text as="h3" variant="heading-sm" className="text-ink">
+                    {name}
+                  </Text>
+                  <Text variant="body-sm" className="mt-2 text-body">
+                    앱 번들 콘텐츠에서 그대로 옮긴 실제 내용 한 토막.
+                  </Text>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── ⑥ 도메인 칩 스트립 ────────────────────────────────────────── */}
         <section className="px-6 pb-24">
           <div className="mx-auto w-full max-w-5xl rounded-lg border border-hairline bg-surface-soft px-6 py-12 text-center sm:px-10">
             <Text as="h2" variant="display-lg" className="text-ink">
@@ -201,7 +258,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── ⑤ FAQ ─────────────────────────────────────────────────────── */}
+        {/* ── ⑦ FAQ ─────────────────────────────────────────────────────── */}
         <section id="faq" className="px-6 pb-24">
           <div className="mx-auto w-full max-w-3xl">
             <Text as="h2" variant="display-lg" className="text-center text-ink">
@@ -222,7 +279,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── ⑥ 마무리 CTA — 마스코트가 있으면 여기 띄운다 ─────────────── */}
+        {/* ── ⑧ 마무리 CTA — 마스코트가 있으면 여기 띄운다 ─────────────── */}
         <section className="px-6 pb-24">
           <div className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-lg bg-surface-dark px-8 py-16 text-center">
             <Text as="h2" variant="display-lg" className="relative text-on-dark">
