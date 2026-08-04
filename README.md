@@ -12,6 +12,7 @@ Sangjae Labs 앱들의 공식 페이지(랜딩·개인정보 처리방침·지�
 |----|------|--------|--------|
 | 네모네모 | 가로·세로 숫자 힌트로 숨겨진 그림을 완성하는 네모로직 퍼즐 게임 | https://nemo.sangjaelabs.com | `nemo` |
 | MoodCam | Y2K 디카 감성 실시간 필터 카메라 (완전 로컬) | https://moodcam.sangjaelabs.com | `moodcam` |
+| 먹꿈 | 말로 남기는 꿈 일기 + 전통·AI 해몽, 꿈 먹고 자라는 먹꿈이 | https://meokkum.sangjaelabs.com | `meokkum` |
 
 > 새 앱을 추가하면 이 표에 행을 추가한다 (main 브랜치에서 커밋).
 
