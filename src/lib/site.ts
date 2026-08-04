@@ -1,11 +1,9 @@
-// ⚠️ 템플릿(main 브랜치)의 placeholder — 새 앱 브랜치에서 이 파일의 값만 교체하면
-// 페이지 전체(랜딩·privacy·support·sitemap·robots)가 그 앱으로 바뀐다.
-// 절차: main에서 `git checkout -b <앱영문명>` → 이 값 교체 → push →
-// DEPLOY.md §1(wrangler 배포)·§2(도메인 API 연결) → main README 인덱스 행 추가.
+// meokkum 브랜치 — 먹꿈(꿈 일기·해몽) 앱 페이지. 앱 특화 문구는 이 파일이 단일 진실.
 export const site = {
-  url: "https://your-app.sangjaelabs.com",
+  url: "https://meokkum.sangjaelabs.com",
   name: "Sangjae Labs",
-  appName: "YOUR_APP_NAME",
-  description: "YOUR_APP_DESCRIPTION — 앱을 한 문장으로 설명한다.",
+  appName: "먹꿈",
+  description:
+    "눈 뜨자마자 말로 남기는 꿈 일기 — 전통 해몽 사전이 바로 답하고, AI가 정밀하게 풀이합니다. 꿈을 먹고 자라는 먹꿈이와 함께요.",
   supportEmail: "sangjae@sangjaelabs.com",
 } as const;

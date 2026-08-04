@@ -8,19 +8,27 @@ export const metadata: Metadata = {
   alternates: { canonical: "/support" },
 };
 
-// ⚠️ 템플릿 placeholder — 새 앱 브랜치에서 FAQ를 앱에 맞게 채운다.
+// 원문 단일 진실: dream-app/shared/store-metadata/support.md
 const faqs = [
   {
-    q: "이용 데이터는 어디에 저장되나요?",
-    a: "앱 이용 데이터는 이용자의 기기 안에만 저장됩니다. 앱을 삭제하면 데이터도 함께 삭제되니 주의해 주세요.",
+    q: "꿈 기록이 다른 기기와 동기화되나요?",
+    a: "아니요. 모든 기록은 기기 안에만 저장됩니다(개인정보 보호를 위한 설계). 앱을 삭제하면 기록도 함께 삭제되니 주의해 주세요.",
   },
   {
-    q: "광고가 표시되지 않거나 앱이 느려요.",
-    a: "네트워크 연결 상태를 확인한 뒤 앱을 완전히 종료하고 다시 실행해 보세요. 문제가 계속되면 이메일로 알려주세요.",
+    q: "AI 해몽이 “준비 중”이라고 나와요.",
+    a: "일시적인 서버 점검이거나 네트워크 문제일 수 있습니다. 잠시 후 다시 시도해 주세요.",
   },
   {
-    q: "버그를 발견했어요. 어떻게 알려드리면 되나요?",
-    a: "아래 이메일로 기기 모델명, iOS 버전, 문제가 발생한 상황을 함께 보내주시면 확인에 큰 도움이 됩니다.",
+    q: "음성 기록이 안 돼요.",
+    a: "설정 > 먹꿈에서 마이크·음성 인식 권한이 켜져 있는지 확인해 주세요. 권한이 꺼져 있어도 텍스트로 기록할 수 있습니다.",
+  },
+  {
+    q: "구독은 어떻게 해지하나요?",
+    a: "iPhone 설정 > Apple 계정 > 구독에서 언제든 해지할 수 있습니다. 앱의 설정 탭 > 구독 관리에서도 바로 이동할 수 있습니다.",
+  },
+  {
+    q: "구매 복원은 어떻게 하나요?",
+    a: "앱의 설정 탭 > 구매 복원을 눌러 주세요.",
   },
 ];
 
@@ -31,7 +39,7 @@ export default function SupportPage() {
         지원
       </Text>
       <Text variant="body-md" className="mt-4 text-body">
-        {site.appName}를 이용하다 궁금한 점이나 문제가 있으면 편하게 문의해
+        {site.appName}을 이용하다 궁금한 점이나 문제가 있으면 편하게 문의해
         주세요. 영업일 기준 1~2일 안에 답변드려요.
       </Text>
 
@@ -44,7 +52,7 @@ export default function SupportPage() {
           아래 내용을 함께 보내주시면 더 빠르게 도와드릴 수 있어요.
         </Text>
         <ul className="mt-3 flex list-disc flex-col gap-1 pl-5">
-          {["기기 모델명 (예: iPhone 15)", "iOS 버전", "문제가 발생한 화면과 상황"].map(
+          {["기기 모델명 (예: iPhone 17)", "iOS 버전", "문제가 발생한 화면과 상황"].map(
             (item) => (
               <Text as="li" variant="body-sm" className="text-body" key={item}>
                 {item}
