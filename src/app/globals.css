@@ -1,2 +1,245 @@
 @import "tailwindcss";
 @import "../design-system/tokens.css";
+
+/* ---------------------------------------------------------------------------
+ * 밤하늘 배경 — 앱 NightSkyBackground 이식
+ * 천정(bg-app) → 지평선(night-4) 그라데이션 + 성운 헤이즈 + 별 2겹 + 별똥별.
+ * ------------------------------------------------------------------------- */
+
+.night-sky {
+  background: linear-gradient(
+    180deg,
+    var(--color-canvas) 0%,
+    var(--color-night-2) 42%,
+    var(--color-night-3) 72%,
+    var(--color-night-4) 100%
+  );
+}
+
+.nebula {
+  background:
+    radial-gradient(42% 34% at 18% 24%, var(--color-nebula-lavender), transparent 70%),
+    radial-gradient(38% 30% at 82% 18%, var(--color-nebula-pink), transparent 70%),
+    radial-gradient(46% 36% at 60% 78%, var(--color-nebula-teal), transparent 72%);
+}
+
+/* 별 2겹 — 작은 별은 촘촘하고 은은하게, 큰 별은 성기고 밝게. 겹마다 다른 주기로 깜빡인다 */
+.starfield,
+.starfield-far {
+  background-repeat: repeat;
+}
+.starfield-far {
+  background-image: radial-gradient(1px 1px at 12px 18px, rgb(244 241 255 / 0.55), transparent 55%),
+    radial-gradient(1px 1px at 68px 44px, rgb(244 241 255 / 0.4), transparent 55%),
+    radial-gradient(1px 1px at 120px 86px, rgb(196 173 255 / 0.45), transparent 55%),
+    radial-gradient(1px 1px at 44px 108px, rgb(244 241 255 / 0.35), transparent 55%),
+    radial-gradient(1px 1px at 152px 30px, rgb(244 241 255 / 0.42), transparent 55%);
+  background-size: 180px 140px;
+  animation: twinkle 5.2s ease-in-out infinite alternate;
+}
+.starfield {
+  background-image: radial-gradient(1.6px 1.6px at 30px 60px, rgb(245 239 201 / 0.9), transparent 60%),
+    radial-gradient(1.4px 1.4px at 140px 22px, rgb(244 241 255 / 0.8), transparent 60%),
+    radial-gradient(1.8px 1.8px at 210px 120px, rgb(196 173 255 / 0.8), transparent 60%),
+    radial-gradient(1.3px 1.3px at 90px 150px, rgb(244 241 255 / 0.7), transparent 60%);
+  background-size: 260px 190px;
+  animation: twinkle 3.4s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 별똥별 — 앱 Theme.Motion.shootingStarInterval(7s)과 동일한 주기로 우상→좌하 낙하 */
+.shooting-star {
+  position: absolute;
+  top: 12%;
+  right: 6%;
+  width: 120px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(270deg, rgb(244 241 255 / 0.95), transparent);
+  transform: rotate(-32deg);
+  opacity: 0;
+  animation: shooting 7s linear infinite;
+  animation-delay: 2.4s;
+}
+
+@keyframes shooting {
+  0% {
+    opacity: 0;
+    transform: rotate(-32deg) translateX(0);
+  }
+  3% {
+    opacity: 0.9;
+  }
+  10% {
+    opacity: 0;
+    transform: rotate(-32deg) translateX(-260px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-32deg) translateX(-260px);
+  }
+}
+
+/* 초승달 — moon-cream 필 + 은은한 글로우 */
+.moon-glow {
+  filter: drop-shadow(0 0 18px rgb(245 239 201 / 0.35));
+}
+
+/* ---------------------------------------------------------------------------
+ * 유리 카드 — 앱 GlassCard (glass-top→bottom 필 + 라벤더 헤어라인 + 블러)
+ * ------------------------------------------------------------------------- */
+
+.glass-card {
+  background: linear-gradient(180deg, var(--color-glass-top), var(--color-glass-bottom));
+  border: 1px solid var(--color-hairline-strong);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 44px rgb(9 8 30 / 0.45);
+}
+
+/* ---------------------------------------------------------------------------
+ * 히어로 데모 — 꿈이 기록되고, 상징이 잡히고, 길몽 판정이 뜨는 핵심 루프 재생.
+ * 각 요소는 --d(등장 지연)를 받아 순서대로 나타난다 (nemo 보드와 같은 관례).
+ * ------------------------------------------------------------------------- */
+
+.demo-line {
+  opacity: 0;
+  animation: rise-in 0.55s ease both;
+  animation-delay: var(--d);
+}
+
+.demo-chip {
+  opacity: 0;
+  animation: chip-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: var(--d);
+}
+
+.demo-badge {
+  opacity: 0;
+  animation: chip-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: var(--d);
+}
+
+/* 골드 배지 옆 4각 스파클 — 잠깐 커졌다 잦아든다 */
+.demo-sparkle {
+  opacity: 0;
+  animation: sparkle 1.6s ease both;
+  animation-delay: var(--d);
+}
+
+.mic-pulse {
+  animation: mic-pulse 2.2s ease-out infinite;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chip-pop {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(0deg);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.15) rotate(18deg);
+  }
+  100% {
+    opacity: 0.75;
+    transform: scale(1) rotate(18deg);
+  }
+}
+
+@keyframes mic-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(139 92 246 / 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgb(139 92 246 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(139 92 246 / 0);
+  }
+}
+
+/* 마스코트 부유 — 앱 Theme.Motion.characterFloat(4.2s ease-in-out 왕복) */
+.float-slow {
+  animation: float-slow 4.2s ease-in-out infinite alternate;
+}
+
+@keyframes float-slow {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-9px);
+  }
+}
+
+/* 한국어 제목 줄바꿈 — 어절 단위로 끊는다(조사만 다음 줄로 떨어지는 것 방지) */
+h1,
+h2,
+h3 {
+  word-break: keep-all;
+}
+
+/* 앵커 이동: 부드럽게, 헤더에 가리지 않게 */
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* 움직임 최소화: 애니메이션을 끄고 완성 상태를 바로 보여준다 */
+@media (prefers-reduced-motion: reduce) {
+  .demo-line,
+  .demo-chip,
+  .demo-badge,
+  .demo-sparkle {
+    animation: none;
+    opacity: 1;
+  }
+  .starfield,
+  .starfield-far {
+    animation: none;
+  }
+  .shooting-star,
+  .mic-pulse {
+    animation: none;
+  }
+  .float-slow {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

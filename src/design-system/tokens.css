@@ -1,44 +1,70 @@
 @theme {
-  /* Brand & accent */
-  --color-primary: #000000;
+  /* ── 먹꿈 미드나잇 팔레트 — 단일 진실: dream-app/shared/DESIGN.pen ──────────
+   * (사본: ios/Sources/Shared/Core/DesignSystem/AppColor.swift)
+   * 페이지는 앱과 동일하게 다크 단일 테마다. */
+
+  /* Brand & accent (AppColor.Brand) */
+  --color-primary: #8b5cf6;
+  --color-primary-dark: #6d28d9;
+  --color-primary-soft: #a78bfa;
   --color-on-primary: #ffffff;
-  --color-ink-deep: #090909;
+  --color-brand-text: #c4adff; /* Text.brand — brandTint 서피스 위 강조 텍스트 */
 
-  /* Surface */
-  --color-canvas: #ffffff;
-  --color-surface-soft: #fafafa;
-  --color-surface-dark: #171717;
-  --color-hairline: #e5e5e5;
-  --color-hairline-strong: #d4d4d4;
+  /* 길흉 시맨틱 (AppColor.Dream) */
+  --color-gold: #f5d06b; /* 길몽 */
+  --color-gold-deep: #b08a2e;
+  --color-gold-soft: rgb(245 208 107 / 0.16);
+  --color-blush: #d98fa6; /* 흉몽 */
+  --color-blush-soft: rgb(217 143 166 / 0.16);
+  --color-moon: #f5efc9; /* 달·크림 하이라이트 */
 
-  /* Text */
-  --color-ink: #000000;
-  --color-charcoal: #525252;
-  --color-body: #737373;
-  --color-mute: #a3a3a3;
-  --color-on-dark: #ffffff;
-  --color-on-dark-mute: rgb(255 255 255 / 0.7);
+  /* Surface (AppColor.Background — 밤하늘) */
+  --color-canvas: #0d0e2c; /* bg-app */
+  --color-night-2: #191553;
+  --color-night-3: #2c1f63;
+  --color-night-4: #472b77;
+  --color-surface: #201c4a; /* 카드 */
+  --color-surface-soft: #191553;
+  --color-surface-elevated: #2c2650;
+  --color-brand-tint: #2a2160; /* 선택 칩 서피스 */
+  --color-surface-deep: rgb(16 14 46 / 0.78); /* 탭바급 반투명 */
+  --color-glass-top: rgb(255 255 255 / 0.1);
+  --color-glass-bottom: rgb(255 255 255 / 0.05);
 
-  /* Semantic (terminal traffic lights) */
-  --color-terminal-red: #ff5f56;
-  --color-terminal-yellow: #ffbd2e;
-  --color-terminal-green: #27c93f;
+  /* Text (AppColor.Text) */
+  --color-ink: #f4f1ff;
+  --color-charcoal: #d9d2f5;
+  --color-body: #a79ddf;
+  --color-mute: #8f84c9;
+  --color-ink-inverse: #14122e; /* 골드 배지 등 밝은 서피스 위 */
+  --color-on-dark: #f4f1ff;
+  --color-on-dark-mute: rgb(244 241 255 / 0.72);
+
+  /* Border (AppColor.Border — 유리 테두리) */
+  --color-hairline: rgb(180 160 255 / 0.14);
+  --color-hairline-strong: rgb(180 160 255 / 0.28);
+
+  /* 성운 헤이즈 (NightSkyBackground) */
+  --color-nebula-pink: rgb(236 72 153 / 0.14);
+  --color-nebula-teal: rgb(56 189 248 / 0.1);
+  --color-nebula-lavender: rgb(167 139 250 / 0.13);
 
   /* Focus */
-  --color-focus-ring: rgb(59 130 246 / 0.5);
+  --color-focus-ring: rgb(139 92 246 / 0.6);
 
-  /* Radius: pill (full) + 12px cards is the entire shape vocabulary */
+  /* Radius (Theme.CornerRadius: sm 11 / md 16 / lg 22 / xl 26) */
   --radius-none: 0px;
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 11px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 26px;
   --radius-full: 9999px;
 
-  /* Fonts: display face used sparingly, body/code stay OS-native */
-  --font-display: var(--font-nunito), ui-rounded, "SF Pro Rounded", system-ui, -apple-system, sans-serif;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Fonts: 앱과 동일한 Pretendard 단일 패밀리 — 웨이트 대비로 위계 (AppTypography) */
+  --font-display: var(--font-pretendard), "Pretendard", -apple-system, system-ui, sans-serif;
+  --font-sans: var(--font-pretendard), "Pretendard", -apple-system, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
-  /* Section rhythm: the single largest spacing token, used between major blocks */
+  /* Section rhythm */
   --spacing-section: 88px;
 }

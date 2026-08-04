@@ -14,7 +14,7 @@ const base = cn(
 );
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-primary text-on-primary active:bg-ink-deep",
+  primary: "bg-primary text-on-primary active:bg-primary-dark",
   secondary: "bg-canvas text-ink border border-hairline-strong",
   "pill-on-dark": "bg-canvas text-ink",
 };
