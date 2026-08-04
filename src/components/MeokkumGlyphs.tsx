@@ -75,6 +75,17 @@ export function StarChartGlyph({ size = 24, className }: GlyphProps) {
   );
 }
 
+/** 자물쇠 (프라이버시 스트립 전용 — 앱 스트로크 문법으로 신규 작도) */
+export function LockGlyph({ size = 24, className }: GlyphProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden className={className}>
+      <rect x={4.6} y={10.4} width={14.8} height={10.2} rx={2.6} stroke="currentColor" {...strokeProps} />
+      <path d="M 8 10.4 L 8 7.4 A 4 4 0 0 1 16 7.4 L 16 10.4" stroke="currentColor" {...strokeProps} />
+      <path d="M 12 14.4 L 12 16.6" stroke="currentColor" {...strokeProps} />
+    </svg>
+  );
+}
+
 /** 노트 + 달 (diaryBook — 탭 일기) */
 export function DiaryGlyph({ size = 24, className }: GlyphProps) {
   return (

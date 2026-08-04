@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { DreamDemo } from "@/components/DreamDemo";
 import {
   DiaryGlyph,
+  LockGlyph,
   MicGlyph,
   MoonStarGlyph,
   SparkSearchGlyph,
@@ -62,6 +63,59 @@ const features = [
     description:
       "달력과 목록으로 되돌아보는 나만의 꿈 기록장. 모든 기록은 기기 안에만 남아요 — 서버에도, 누구에게도 가지 않아요.",
     Glyph: DiaryGlyph,
+  },
+];
+
+/* 앱 미리보기 — 시뮬레이터 실촬영 (상태바 제외 크롭) */
+const screens = [
+  { src: "/images/screens/home.jpg", title: "미드나잇 홈", desc: "달력 위 꿈 기록, 그 아래 먹꿈이" },
+  { src: "/images/screens/tip.jpg", title: "오늘의 꿈 회상 팁", desc: "기록 전 한 가지씩, 매일 바뀌어요" },
+  { src: "/images/screens/detail.jpg", title: "즉답 해몽", desc: "상징 감지와 길흉 판정을 그 자리에서" },
+  { src: "/images/screens/dict.jpg", title: "꿈 사전", desc: "12개 카테고리, 상징 300개" },
+];
+
+/* 사전 미리보기 — 실제 번들 사전(symbols-v1.json)에서 발췌 */
+const symbolPreviews = [
+  { name: "돼지", fortune: "길몽", meaning: "재물운을 상징하는 대표적인 길몽. 품에 안기거나 집안으로 들어오면 뜻밖의 재물이나 횡재로 풀이해요." },
+  { name: "용", fortune: "길몽", meaning: "전통 해몽에서 가장 으뜸으로 꼽는 대길몽. 하늘로 힘차게 승천하면 큰 출세나 성공을 뜻해요." },
+  { name: "뱀", fortune: "상황따라", meaning: "재물과 태몽의 대표 상징. 품에 들어오면 재물운, 물리거나 쫓기며 두려우면 구설수 신호로 봐요." },
+  { name: "불", fortune: "길몽", meaning: "불길이 세차게 타오를수록 재물과 명예가 크게 일어나는 길몽으로 봐요." },
+  { name: "물", fortune: "상황따라", meaning: "맑고 잔잔하면 마음의 안정과 재물운, 거센 물살에 빠지면 감정의 소용돌이를 뜻해요." },
+  { name: "시험", fortune: "상황따라", meaning: "현실의 평가와 부담감이 그대로 나타난 꿈. 잘 풀면 준비가 되어 간다는 신호예요." },
+];
+
+/* 수면 연구 근거 — 앱 회상 팁 10장의 출처 (tip-cards.json version 2와 동일 근거) */
+const research = [
+  {
+    tip: "깨어난 직후엔 움직이지 마세요",
+    basis: "깬 직후의 방해에 약한 사람일수록 '꿈은 꿨는데 내용이 안 떠오르는' 상태가 잦았어요 — 수면 측정 연구(Communications Psychology, 2025)",
+  },
+  {
+    tip: "빈손으로도 매일 열어보세요",
+    basis: "꿈 일기를 2주만 꾸준히 써도 회상 빈도가 뚜렷하게 오른다는 결과가 있어요 — 꿈 일기 훈련 연구(Schredl)",
+  },
+  {
+    tip: "새벽에 깼다면 그때가 기회예요",
+    basis: "렘수면 직후 깨어나면 꿈을 보고할 확률이 85%에 이르고, 렘수면은 새벽으로 갈수록 길어져요 — 실험실 각성 연구",
+  },
+];
+
+/* 프라이버시 3약속 */
+const privacy = [
+  {
+    title: "완전 로컬 저장",
+    description: "꿈 기록·감정·캐릭터 성장 전부 기기 안에만. 회원가입도, 서버 보관도 없어요.",
+    Glyph: LockGlyph,
+  },
+  {
+    title: "온디바이스 음성 인식",
+    description: "목소리는 기기 밖으로 나가지 않아요. 받아쓰기가 전부 기기 안에서 끝나요.",
+    Glyph: MicGlyph,
+  },
+  {
+    title: "광고 없음",
+    description: "잠에서 막 깬 조용한 아침을 방해하고 싶지 않았어요. 추적도 광고 SDK도 없어요.",
+    Glyph: MoonStarGlyph,
   },
 ];
 
@@ -195,6 +249,38 @@ export default function Home() {
             </div>
           </section>
 
+          {/* ── 앱 미리보기 (시뮬레이터 실촬영) ───────────────────────── */}
+          <section id="screens" className="px-6 pb-24">
+            <div className="mx-auto w-full max-w-5xl">
+              <Text as="h2" variant="display-lg" className="text-center text-ink">
+                미리 둘러보기
+              </Text>
+              <div className="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-4">
+                {screens.map((screen) => (
+                  <figure key={screen.title}>
+                    <div className="overflow-hidden rounded-lg border border-hairline-strong shadow-[0_18px_44px_rgb(9_8_30/0.45)]">
+                      <Image
+                        src={screen.src}
+                        alt={`${screen.title} 화면`}
+                        width={750}
+                        height={1514}
+                        className="w-full"
+                      />
+                    </div>
+                    <figcaption className="mt-3">
+                      <Text as="span" variant="body-sm-strong" className="block text-ink">
+                        {screen.title}
+                      </Text>
+                      <Text as="span" variant="caption-sm" className="mt-0.5 block text-body">
+                        {screen.desc}
+                      </Text>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* ── 기능 3종 ──────────────────────────────────────────────── */}
           <section id="features" className="px-6 pb-24">
             <div className="mx-auto w-full max-w-5xl">
@@ -212,6 +298,43 @@ export default function Home() {
                     </Text>
                     <Text variant="body-sm" className="mt-2 text-body">
                       {feature.description}
+                    </Text>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── 사전 미리보기 (실제 300개 사전에서 발췌) ──────────────── */}
+          <section className="px-6 pb-24">
+            <div className="mx-auto w-full max-w-5xl">
+              <Text as="h2" variant="display-lg" className="text-center text-ink">
+                사전을 한 장만 미리 볼까요?
+              </Text>
+              <Text variant="body-sm" className="mx-auto mt-3 max-w-md text-center text-body">
+                실제 수록된 300개 상징 중 여섯 — 전부 오프라인으로 열려요.
+              </Text>
+              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {symbolPreviews.map((symbol) => (
+                  <article key={symbol.name} className="glass-card p-5">
+                    <div className="flex items-center justify-between">
+                      <Text as="h3" variant="heading-sm" className="text-ink">
+                        {symbol.name}
+                      </Text>
+                      <span
+                        className={cn(
+                          typography["caption-sm"],
+                          "rounded-full px-3 py-1",
+                          symbol.fortune === "길몽"
+                            ? "bg-gold-soft font-semibold text-gold"
+                            : "border border-hairline-strong text-body",
+                        )}
+                      >
+                        {symbol.fortune}
+                      </span>
+                    </div>
+                    <Text variant="body-sm" className="mt-2 text-body">
+                      {symbol.meaning}
                     </Text>
                   </article>
                 ))}
@@ -243,6 +366,60 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </section>
+
+          {/* ── 수면 연구 근거 (앱 회상 팁의 출처) ────────────────────── */}
+          <section className="px-6 pb-24">
+            <div className="mx-auto w-full max-w-5xl">
+              <Text as="h2" variant="display-lg" className="text-center text-ink">
+                회상 팁은 수면 연구에서 왔어요
+              </Text>
+              <Text variant="body-sm" className="mx-auto mt-3 max-w-lg text-center text-body">
+                {site.appName}의 &lsquo;오늘의 꿈 회상 팁&rsquo;은 감이 아니라
+                실제 수면 연구 결과로 골랐어요. 열 가지 중 세 가지만 미리 보여드릴게요.
+              </Text>
+              <div className="mt-10 grid gap-5 sm:grid-cols-3">
+                {research.map((item) => (
+                  <article key={item.tip} className="glass-card p-6">
+                    <Star4Glyph size={14} className="text-brand-text" />
+                    <Text as="h3" variant="heading-sm" className="mt-4 text-ink">
+                      {item.tip}
+                    </Text>
+                    <Text variant="body-sm" className="mt-2 text-body">
+                      {item.basis}
+                    </Text>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── 프라이버시 3약속 ──────────────────────────────────────── */}
+          <section className="px-6 pb-24">
+            <div className="glass-card mx-auto w-full max-w-5xl px-6 py-12 sm:px-10">
+              <Text as="h2" variant="display-lg" className="text-center text-ink">
+                당신의 꿈은 기기 밖으로 나가지 않아요
+              </Text>
+              <div className="mt-10 grid gap-8 sm:grid-cols-3">
+                {privacy.map((item) => (
+                  <div key={item.title} className="text-center">
+                    <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-brand-tint text-brand-text">
+                      <item.Glyph size={22} />
+                    </div>
+                    <Text as="h3" variant="heading-sm" className="mt-4 text-ink">
+                      {item.title}
+                    </Text>
+                    <Text variant="body-sm" className="mx-auto mt-2 max-w-xs text-body">
+                      {item.description}
+                    </Text>
+                  </div>
+                ))}
+              </div>
+              <Text variant="caption-sm" className="mt-8 text-center text-mute">
+                유일한 예외: AI 정밀 해몽을 실행하는 순간에만 그 꿈의 본문이 해몽
+                생성을 위해 일시 전송되고, 저장되지 않아요.
+              </Text>
             </div>
           </section>
 
